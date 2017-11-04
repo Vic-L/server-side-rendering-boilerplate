@@ -29,3 +29,6 @@ functions:
             headers:
               Content-Type: "'text/html'"
             template: $input.path('$')
+
+plugins:
+  - serverless-offline
