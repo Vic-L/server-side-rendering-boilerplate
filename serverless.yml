@@ -1,12 +1,12 @@
 custom: 
   service: ${file(env.yml):service}
   provider: ${file(env.yml):provider}
-  customDomain: 
-    domainName: ${file(env.yml):customDomain.domainName}
-    certificateName: ${file(env.yml):customDomain.certificateName}
-    basePath: ${file(env.yml):customDomain.basePath}
+  customDomain:
+    domainName: ${file(env.yml):customDomain.${opt:stage, 'dev'}DomainName}
+    certificateName: ${file(env.yml):customDomain.${opt:stage, 'dev'}CertificateName}
+    basePath: ${file(env.yml):customDomain.${opt:stage, 'dev'}BasePath}
     stage: ${opt:stage, 'dev'}
-    createRoute53Record: ${file(env.yml):customDomain.createRoute53Record}
+    createRoute53Record: ${file(env.yml):customDomain.${opt:stage, 'dev'}CreateRoute53Record}
 
 service: ${self:custom.service}
 
