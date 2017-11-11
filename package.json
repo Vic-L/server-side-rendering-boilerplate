@@ -5,6 +5,7 @@
   "repository": "https://github.com/Vic-L/server-side-rendering-boilerplate",
   "dependencies": {},
   "devDependencies": {
+    "serverless-domain-manager": "^1.1.19",
     "serverless-offline": "^3.16.0"
   },
   "scripts": {
