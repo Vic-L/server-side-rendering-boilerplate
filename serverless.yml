@@ -23,20 +23,24 @@ provider:
     name: ${self:custom.provider.awsTagName}
 
 functions:
-  html:
+  renderHomePage:
     handler: html/handler.render
     tags:
       name: ${self:custom.provider.awsTagName}
     events:
       - http:
-          path: ''
+          path: '/'
           method: get
           cors: true
-          integration: lambda
-          response:
-            headers:
-              Content-Type: "'text/html'"
-            template: $input.path('$')
+  renderHtml:
+    handler: html/handler.render
+    tags:
+      name: ${self:custom.provider.awsTagName}
+    events:
+      - http:
+          path: '{proxy+}'
+          method: get
+          cors: true
 
 plugins:
   - serverless-offline
