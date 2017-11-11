@@ -20,13 +20,13 @@ provider:
   profile: ${self:custom.provider.awsProfile} # aws named profile
   stage: ${opt:stage, 'dev'} # `sls deploy --stage production` if --stage is provided, else use dev
   stackTags: # Optional CF stack tags
-    name: ${self:custom.provider.awsTagName}
+    Name: ${self:custom.provider.awsTagName}
 
 functions:
   renderHomePage:
     handler: html/handler.render
     tags:
-      name: ${self:custom.provider.awsTagName}
+      Name: ${self:custom.provider.awsTagName}
     events:
       - http:
           path: '/'
@@ -35,7 +35,7 @@ functions:
   renderHtml:
     handler: html/handler.render
     tags:
-      name: ${self:custom.provider.awsTagName}
+      Name: ${self:custom.provider.awsTagName}
     events:
       - http:
           path: '{proxy+}'
