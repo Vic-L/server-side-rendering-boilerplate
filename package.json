@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Boilerplate for render html with API Gateway and AWS Lambda to give server side rendering",
   "repository": "https://github.com/Vic-L/server-side-rendering-boilerplate",
-  "dependencies": {},
+  "dependencies": {
+    "serverless-aws-documentation": "^1.0.0",
+    "serverless-dynamodb-local": "^0.2.26"
+  },
   "devDependencies": {
     "serverless-domain-manager": "^1.1.19",
     "serverless-offline": "^3.16.0"

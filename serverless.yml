@@ -23,6 +23,10 @@ provider:
     Name: ${self:custom.provider.awsTagName}
   environment:
     GOOGLE_SITE_VERIFICATION: ${self:custom.provider.${opt:stage, 'dev'}GoogleSiteVerification}
+    DYNAMODB_REGION: ${self:custom.dynamodbConfig.${opt:stage, 'dev'}Region}
+    DYNAMODB_ENDPOINT: ${self:custom.dynamodbConfig.${opt:stage, 'dev'}Endpoint}
+    DYNAMODB_AWS_ACCESS_KEY_ID: ${self:custom.dynamodbConfig.${opt:stage, 'dev'}AwsAccessKeyId}
+    DYNAMODB_AWS_SECRET_ACCESS_KEY: ${self:custom.dynamodbConfig.${opt:stage, 'dev'}AwsSecretAccessKey}
 
 functions:
   renderHomePage:
@@ -44,6 +48,28 @@ functions:
           method: get
           cors: true
 
+resources:
+  Resources:
+    DriversTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: DriversTable
+        AttributeDefinitions:
+          - AttributeName: something
+            AttributeType: S
+          - AttributeName: somethingElse
+            AttributeType: S
+        KeySchema:
+          - AttributeName: something
+            KeyType: HASH
+          - AttributeName: somethingElse
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: ${self:custom.dynamodbConfig.${opt:stage, 'dev'}RCU}
+          WriteCapacityUnits: ${self:custom.dynamodbConfig.${opt:stage, 'dev'}WCU}
+
 plugins:
+  - serverless-dynamodb-local
   - serverless-offline
+  - serverless-aws-documentation
   - serverless-domain-manager
